@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const merSchema = new Schema({
+const merchSchema = new Schema({
   productID: {
     type: String,
     unique: true
@@ -22,17 +22,21 @@ const merSchema = new Schema({
             type: String,
             required: true
           },
-          price: {
-            type: String,
-            required: true
+          priceInCents: {
+            type: Number,
+            required: true,
+            default: null
           }
+
         }
       ]
     }
   ],
+  productImages: [String],
   outOfStock: {
     type: Boolean,
-    required: true
+    required: true,
+    default: false
   },
   description: {
     type: String,
@@ -40,4 +44,4 @@ const merSchema = new Schema({
   }
 });
 
-module.exports = mongoose.model('Merch', merSchema);
+module.exports = mongoose.model('Merch', merchSchema);
