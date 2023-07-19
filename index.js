@@ -10,6 +10,8 @@ app.use(cors())
 mongoose.set('strictQuery', true)
 
 const merchRoutes = require('./routes/merch.js')
+const beanRoutes = require('./routes/bean.js')
+const newsLetterRoutes = require('./routes/newsLetter.js')
 
 let mongoURI = ""
 if (process.env.NODE_ENV === "production") {
@@ -27,6 +29,8 @@ db.once('open', () => {
 })
 
 app.use('/merch', merchRoutes)
+app.use('/newsLetter', newsLetterRoutes)
+app.use('/bean', beanRoutes)
 
 app.get('/', (req, res) => {
   res.send('API for stus brews')
