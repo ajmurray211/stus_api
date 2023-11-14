@@ -3,15 +3,21 @@ const cors = require('cors')
 const dotenv = require('dotenv')
 const mongoose = require('mongoose')
 const app = express()
+const path = require('path')
 dotenv.config()
+
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 app.use(cors())
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 mongoose.set('strictQuery', true)
+
+const createCheckoutSession = require('./utils/checkout.js');
 
 const merchRoutes = require('./routes/merch.js')
 const beanRoutes = require('./routes/bean.js')
 const newsLetterRoutes = require('./routes/newsLetter.js')
+const variantRoutes = require('./routes/variants.js')
 
 let mongoURI = ""
 if (process.env.NODE_ENV === "production") {
@@ -31,6 +37,11 @@ db.once('open', () => {
 app.use('/merch', merchRoutes)
 app.use('/newsLetter', newsLetterRoutes)
 app.use('/bean', beanRoutes)
+app.use('/variants', variantRoutes)
+app.post('/create-checkout-session', createCheckoutSession, (req, res) => {
+  const session = res.locals.session;
+  res.json({ url: session.url });
+});
 
 app.get('/', (req, res) => {
   res.send('API for stus brews')

@@ -18,15 +18,21 @@ const beanSchema = new Schema({
     {
         type: String
     },
-    sizeOptions: [{
-        name: {
-            type: String
+    variants: [
+        {
+            productImages: [String],
+            sizeOptions: [
+                {
+                    name: {
+                        type: String
+                    },
+                    priceInCents: {
+                        type: Number
+                    }
+                }
+            ],
         },
-        priceInCents: {
-            type: Number
-        }
-    }],
-    images: [String],
+    ],
     description: {
         type: String
     },
