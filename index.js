@@ -18,6 +18,7 @@ const merchRoutes = require('./routes/merch.js')
 const beanRoutes = require('./routes/bean.js')
 const newsLetterRoutes = require('./routes/newsLetter.js')
 const variantRoutes = require('./routes/variants.js')
+const bakedGoodRoutes = require('./routes/bakedGoods.js')
 
 let mongoURI = ""
 if (process.env.NODE_ENV === "production") {
@@ -35,6 +36,7 @@ db.once('open', () => {
 })
 
 app.use('/merch', merchRoutes)
+app.use('/bakedGoods', bakedGoodRoutes)
 app.use('/newsLetter', newsLetterRoutes)
 app.use('/bean', beanRoutes)
 app.use('/variants', variantRoutes)
