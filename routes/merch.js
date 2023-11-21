@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
     filename: function (req, file, cb) {
         const uniqueSuffix = uuidv4();
         const fileExtension = path.extname(file.originalname);
-        console.log('multer' , file)
+        console.log('multer', file)
         cb(null, uniqueSuffix + fileExtension);
 
     }
@@ -22,10 +22,11 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // Controller functions
-const { getProducts, addProduct, editProduct, deleteProduct } = require('../controller/merch.js');
+const { getProducts, addProduct, getProductById, editProduct, deleteProduct } = require('../controller/merch.js');
 
 router.get('/', getProducts);
 router.post('/', upload.array('productImages', 5), addProduct);
+router.get('/:id', getProductById);
 router.put('/:id', upload.array('productImages', 5), editProduct);
 router.delete('/delete/:id', deleteProduct);
 

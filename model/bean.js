@@ -6,42 +6,43 @@ const beanSchema = new Schema({
     name: {
         type: String
     },
-    productId:
+    image: {
+        type: String,
+        default: 'uploads/beanBag.png'
+    },
+    description: {
+        type: String
+    },
+    priceInCents: {
+        type: Number
+    },
+    Collection:
     {
         type: String,
-        unique: true
     },
     region: {
         type: String
     },
+    roast: {
+        type: String,
+    },
     type:
     {
-        type: String
+        type: String,
+        default: 'Whole'
     },
-    variants: [
-        {
-            productImages: [String],
-            sizeOptions: [
-                {
-                    name: {
-                        type: String
-                    },
-                    priceInCents: {
-                        type: Number
-                    }
-                }
-            ],
+    stock: {
+        type: Number,
+        default: 0
+    },
+    dropdowns: {
+        ingredients: {
+            type: String
         },
-    ],
-    description: {
-        type: String
-    },
-    ingredients: {
-        type: String
-    },
-    outOfStock: {
-        type: Boolean,
-        default: false
+        reviews: {
+            type: [String],
+            default: ['No reviews on this product yet.']
+        },
     }
 })
 

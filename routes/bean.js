@@ -1,13 +1,15 @@
 const express = require('express')
 
 // controller functions
-const { getBeans, addBean, editBean, deleteBean } = require('../controller/beans.js')
+const { getBeans, addBean, getBeanById, editBean, deleteBean } = require('../controller/beans.js')
 
 const router = express.Router()
 
 router.get('/', getBeans)
 
 router.post('/', addBean)
+
+router.get('/:id', getBeanById)
 
 router.put('/edit/:id', editBean)
 

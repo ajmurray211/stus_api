@@ -13,6 +13,17 @@ const addBean = async (req, res) => {
         .catch(err => res.status(404).json({ error: 'There was a problem creating the new Bean.', err: err }))
 }
 
+// get a single bean by its id
+const getBeanById = async (req, res) => {
+    try {
+        const id = req.params.id
+        const data = await Bean.findById(id)
+        res.status(200).json(data);
+    } catch (err) {
+        res.status(404).json({ error: 'There was a problem finding the product.' });
+    }
+}
+
 const editBean = async (req, res) => {
     Bean.findByIdAndUpdate(req.params.id, req.body, { new: true })
         .then(data => res.status(200).json({ data: data, message: 'Here is the Bean you have edited.' }))
@@ -28,6 +39,7 @@ const deleteBean = async (req, res) => {
 module.exports = {
     getBeans,
     addBean,
+    getBeanById,
     editBean,
     deleteBean
 } 

@@ -17,9 +17,20 @@ const bakedGoodSchema = new Schema({
     image: {
         type: String
     },
-    ingredients: {
-        type: String
+    stock: {
+        type: Number,
+        default: 0
+    },
+    dropdowns:
+    {
+        ingredients: {
+            type: String
+        },
+        reviews: {
+            type: [String],
+            default: ['No reviews on this product yet.']
+        },
     }
 });
 
-module.exports = mongoose.model('BakedGood', bakedGoodSchema);  // Capitalized the model name
+module.exports = mongoose.model('BakedGood', bakedGoodSchema);  
